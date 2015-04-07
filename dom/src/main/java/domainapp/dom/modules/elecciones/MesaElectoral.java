@@ -236,7 +236,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     }
     @MemberOrder(name="location", sequence="1")
     @ActionLayout(named = "Actualizar Localización")
-    public Fiscal updateLocation(
+    public MesaElectoral updateLocation(
             @ParameterLayout(named="Dirección")
             final String address) {
         final Location location = this.locationService.lookup(address);
