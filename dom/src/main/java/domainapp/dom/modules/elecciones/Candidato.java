@@ -69,6 +69,21 @@ public class Candidato implements Comparable<Candidato> {
     }
   //endregion
 
+  //region > Lista (property)
+  private String lista;
+
+    @MemberOrder(sequence = "3")
+    @Column(allowsNull = "False")
+    public String getListaCandidato() {
+        return lista;
+    }
+
+    public void setListaCandidato(final String lista) {
+        this.lista = lista;
+    }
+    //endregion
+
+
   //region > partido (property)
     private PartidoPolitico partido;
 
