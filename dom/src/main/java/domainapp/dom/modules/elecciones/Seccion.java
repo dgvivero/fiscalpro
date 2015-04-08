@@ -33,12 +33,10 @@ import java.util.TreeSet;
                 name = "findByDocument", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Seccion "
-                        + "WHERE nroDoc =:doc")
+                        + "WHERE nroDoc.startsWith(:doc)")
 })
 @javax.jdo.annotations.Unique(name="SECCION_UNQ", members = {"nroSeccion"})
-@DomainObject(
-        objectType = "SECCION"
-)
+@DomainObject(objectType = "SECCION")
 
 public class Seccion implements Comparable<Seccion> {
 
@@ -75,16 +73,16 @@ public class Seccion implements Comparable<Seccion> {
       */
 
     //region > Distrito (property)
-    private Distrito Distrito;
+    private Distrito distrito;
 
     @MemberOrder(sequence = "3")
     @Column(allowsNull = "False")
     public Distrito getDistrito() {
-        return Distrito;
+        return distrito;
     }
 
     public void setDistrito(final Distrito Distrito) {
-        this.Distrito = Distrito;
+        this.distrito = distrito;
     }
     public Distrito defaultDistrito() {
         return contenedor.uniqueMatch(Distrito.class, "Capital Federal");

@@ -29,7 +29,7 @@ import javax.jdo.annotations.VersionStrategy;
                 name = "findByName", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Distrito"
-                        + "WHERE nombreDistrito =:nombreDistrito")
+                        + "WHERE nombreDistrito.:startsWith(:nombreDistrito)")
 })
 @javax.jdo.annotations.Unique(name="DISTRITO_UNQ", members = {"nrodistrito"})
 @DomainObject(
