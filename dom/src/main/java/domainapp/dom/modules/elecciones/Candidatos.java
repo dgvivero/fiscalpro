@@ -35,7 +35,7 @@ public class Candidatos {
     public Candidato create(
             final @ParameterLayout(named="Nombre")String nombre,
             final @ParameterLayout(named="Apellido")String apellido,
-            final @ParameterLayout(named = "Partido")PartidoPolitico partido) {
+            final @ParameterLayout(named ="Partido")PartidoPolitico partido) {
 
         final Candidato c = container.newTransientInstance(Candidato.class);
         c.setApellidoCandidato(apellido);
@@ -45,11 +45,18 @@ public class Candidatos {
         return c;
     }
 
+    public List<PartidoPolitico> autoComplete2Create(String search) {
+        return partidosPoliticos.listByName(search);
+    }
+
 
     //endregion
 
     @javax.inject.Inject
     DomainObjectContainer container;
+
+    @javax.inject.Inject
+    PartidosPoliticos partidosPoliticos;
 
     //endregion
 }

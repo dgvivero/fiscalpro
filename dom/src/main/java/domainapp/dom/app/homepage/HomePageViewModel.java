@@ -18,32 +18,64 @@
  */
 package domainapp.dom.app.homepage;
 
+import domainapp.dom.modules.elecciones.*;
 import domainapp.dom.modules.simple.SimpleObject;
 import domainapp.dom.modules.simple.SimpleObjects;
 
 import java.util.List;
-import org.apache.isis.applib.annotation.ViewModel;
+
+import org.apache.isis.applib.annotation.*;
 
 @ViewModel
+@MemberGroupLayout(
+        columnSpans={0,0,0,12}, left="Resultados")
+
 public class HomePageViewModel {
 
     //region > title
     public String title() {
-        return getObjects().size() + " objects";
+        return  " Panel de Control";
+    }
+    //endregion
+/*
+    //region > object (collection)
+    @org.apache.isis.applib.annotation.HomePage
+    @MemberOrder(name="Resultados",sequence="1")
+    @CollectionLayout(render = RenderType.EAGERLY)
+    public List<PartidoPolitico> getPartidos() {
+        return partidos.listAll();
+    }
+    //endregion
+    */
+
+    //region > object (collection)
+    @org.apache.isis.applib.annotation.HomePage
+    @MemberOrder(name="Resultados", sequence="2")
+    public List<Candidato> getCandidatos() {
+        return candidatos.listAll();
     }
     //endregion
 
     //region > object (collection)
     @org.apache.isis.applib.annotation.HomePage
-    public List<SimpleObject> getObjects() {
-        return simpleObjects.listAll();
+    @MemberOrder(sequence="99")
+    public List<Fiscal> getFiscales() {
+        return fiscales.listAll();
     }
     //endregion
 
     //region > injected services
 
     @javax.inject.Inject
-    SimpleObjects simpleObjects;
+    PartidosPoliticos partidos;
+
+    @javax.inject.Inject
+    Candidatos candidatos;
+
+    @javax.inject.Inject
+    Fiscales fiscales;
+
+
 
     //endregion
 }

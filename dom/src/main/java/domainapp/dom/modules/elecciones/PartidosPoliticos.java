@@ -19,8 +19,18 @@ public class PartidosPoliticos {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Listado de Partidos")
     @MemberOrder(sequence = "1")
+    @HomePage
     public List<PartidoPolitico> listAll() {
         QueryDefault<PartidoPolitico> query = QueryDefault.create(PartidoPolitico.class,"find");
+        return container.allMatches(query);
+    }
+    //endregion
+
+    //region > listAll (action)
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(named = "Listado de Partidos", hidden = Where.ANYWHERE)
+    public List<PartidoPolitico> listByName(final String nombrePartido) {
+        QueryDefault<PartidoPolitico> query = QueryDefault.create(PartidoPolitico.class,"findByNombre","nombrePartido", nombrePartido);
         return container.allMatches(query);
     }
     //endregion

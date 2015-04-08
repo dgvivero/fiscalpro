@@ -26,12 +26,12 @@ import java.util.TreeSet;
         @javax.jdo.annotations.Query(
                 name = "find", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM domainapp.dom.modules.elecciones.PartidoPolitico "),
+                        + "FROM PartidoPolitico "),
         @javax.jdo.annotations.Query(
                 name = "findByNombre", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM domainapp.dom.modules.elecciones.PartidoPolitico "
-                        + "WHERE nombrePartido LIKE %:nombrePartido%")
+                        + "FROM PartidoPolitico "
+                        + "WHERE nombrePartido.startsWith(:nombrePartido)")
 })
 @javax.jdo.annotations.Unique(name="PARTIDOPOLITICO_UNQ", members = {"nombrePartido"})
 @DomainObject(objectType = "PARTIDOPOLITICO")

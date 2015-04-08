@@ -17,8 +17,20 @@
 {
     "columns": [
         {
-            "span": 0,
-            "memberGroups": {}
+            "span": 6,
+            "memberGroups": {
+              "Resultados": {
+                "collections": {
+                  "objects": {
+                    "collectionLayout": {
+                      "render": "EAGERLY"
+                    }
+                  }
+                }
+
+              }
+            }
+
         },
         {
             "span": 0,
@@ -30,13 +42,7 @@
         },
         {
             "span": 12,
-            "collections": {
-                "objects": {
-                    "collectionLayout": {
-                        "render": "EAGERLY"
-                    }
-                }
-            }
+          "memberGroups": {}
         }
     ],
     "actions": {}
