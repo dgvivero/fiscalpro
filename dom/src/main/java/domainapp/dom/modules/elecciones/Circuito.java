@@ -30,7 +30,7 @@ import java.util.TreeSet;
                 name = "findByDocument", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Circuito "
-                        + "WHERE nroCircuito =:nroCircuito")
+                        + "WHERE nroCircuito.startsWith(:nroCircuito)")
 })
 @javax.jdo.annotations.Unique(name="CIRCUITO_UNQ", members = {"distrito, seccion, nroCircuito"})
 @DomainObject(

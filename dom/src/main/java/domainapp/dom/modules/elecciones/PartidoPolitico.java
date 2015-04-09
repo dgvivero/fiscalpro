@@ -26,7 +26,7 @@ import java.util.TreeSet;
         @javax.jdo.annotations.Query(
                 name = "find", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM PartidoPolitico "),
+                        + "FROM domainapp.dom.modules.elecciones.PartidoPolitico"),
         @javax.jdo.annotations.Query(
                 name = "findByNombre", language = "JDOQL",
                 value = "SELECT "

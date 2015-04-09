@@ -30,7 +30,7 @@ import org.apache.isis.applib.annotation.SemanticsOf;
 )
 public class HomePageService {
 
-    /*
+
     //region > homePage (action)
 
     @Action(
@@ -42,7 +42,7 @@ public class HomePageService {
     }
 
     //endregion
-    */
+
 
     //region > injected services
 

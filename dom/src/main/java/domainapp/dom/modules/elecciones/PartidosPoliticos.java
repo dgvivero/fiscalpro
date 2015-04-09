@@ -19,7 +19,6 @@ public class PartidosPoliticos {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Listado de Partidos")
     @MemberOrder(sequence = "1")
-    @HomePage
     public List<PartidoPolitico> listAll() {
         QueryDefault<PartidoPolitico> query = QueryDefault.create(PartidoPolitico.class,"find");
         return container.allMatches(query);
