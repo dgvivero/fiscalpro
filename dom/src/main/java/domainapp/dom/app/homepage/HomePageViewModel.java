@@ -19,6 +19,7 @@
 package domainapp.dom.app.homepage;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,6 +41,7 @@ import com.googlecode.wickedcharts.highcharts.options.functions.PercentageFormat
 import com.googlecode.wickedcharts.highcharts.options.series.Point;
 import com.googlecode.wickedcharts.highcharts.options.series.PointSeries;
 import com.googlecode.wickedcharts.highcharts.options.series.Series;
+import com.googlecode.wickedcharts.highcharts.options.series.SimpleSeries;
 import domainapp.dom.modules.elecciones.*;
 import org.isisaddons.wicket.wickedcharts.cpt.applib.WickedChart;
 
@@ -55,7 +57,7 @@ public class HomePageViewModel {
     }
     //endregion
 
-   @Action(
+  /* @Action(
             semantics = SemanticsOf.SAFE
     )
     public WickedChart getPieChart() {
@@ -122,18 +124,29 @@ public class HomePageViewModel {
             addSeries(series);
         }
     }
-
+*/
    @Action(
             semantics = SemanticsOf.SAFE
     )
-    public List<Fiscal> getFiscales() {
-     return fiscales.listAll();
+     public List<Fiscal> getFiscales() {
+        return fiscales.listAll();
+    }
+
+    @Action(
+            semantics = SemanticsOf.SAFE
+    )
+    public WickedChart getGraficoPorPartido() {
+
+        return partidos.showPieChart();
     }
 
   //region > injected services
 
     @javax.inject.Inject
     PartidosPoliticos partidos;
+
+    @javax.inject.Inject
+    PartidoPolitico partido;
 
     @javax.inject.Inject
     Candidatos candidatos;

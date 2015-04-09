@@ -30,7 +30,7 @@ import javax.jdo.annotations.VersionStrategy;
                 name = "findByNroMesa", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.MsaElectoral "
-                        + "WHERE nromesa =:nromesa")
+                        + "WHERE nromesa.startsWith(:nromesa)")
 })
 @javax.jdo.annotations.Unique(name="MESAELECTORAL_UNQ", members = {"nroMesa"})
 @DomainObject(
@@ -47,35 +47,6 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
         return buf.toString();
     }
    // endregion
-
-   //region > distrito (property)
-    private Distrito distrito;
-
-    @MemberOrder(name="General",sequence = "1")
-    @Column(allowsNull = "False")
-    public Distrito getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(final Distrito Distrito) {
-        this.distrito = distrito;
-    }
-
-    //endregion
-
-    //region > seccion (property)
-    private Seccion seccion;
-
-    @MemberOrder(name="General",sequence = "2")
-    @Column(allowsNull = "False")
-    public Seccion getSeccion() {
-        return seccion;
-    }
-
-    public void setSeccion(final Seccion seccion) {
-        this.seccion = seccion;
-    }
-    //endregion
 
     //region > circuito (property)
     private Circuito circuito;
@@ -248,7 +219,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
 
     @Override
     public int compareTo(final MesaElectoral other) {
-        return ObjectContracts.compare(this, other, "nroMesa, seccion, distrito");
+        return ObjectContracts.compare(this, other, "nroMesa, circuito");
     }
 
     //Injections

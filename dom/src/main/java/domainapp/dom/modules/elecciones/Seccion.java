@@ -33,7 +33,7 @@ import java.util.TreeSet;
                 name = "findByDocument", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Seccion "
-                        + "WHERE nroDoc.startsWith(:doc)")
+                        + "WHERE nroSeccion.startsWith(:nroSeccion)")
 })
 @javax.jdo.annotations.Unique(name="SECCION_UNQ", members = {"nroSeccion"})
 @DomainObject(objectType = "SECCION")

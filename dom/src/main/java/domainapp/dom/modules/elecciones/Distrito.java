@@ -1,13 +1,13 @@
 package domainapp.dom.modules.elecciones;
 
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Title;
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
+import java.util.List;
 
 /**
  * Created by German on 24/03/2015.
@@ -29,7 +29,7 @@ import javax.jdo.annotations.VersionStrategy;
                 name = "findByName", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Distrito"
-                        + "WHERE nombreDistrito.:startsWith(:nombreDistrito)")
+                        + "WHERE nombreDistrito.startsWith(:nombreDistrito)")
 })
 @javax.jdo.annotations.Unique(name="DISTRITO_UNQ", members = {"nrodistrito"})
 @DomainObject(
@@ -51,7 +51,8 @@ public class Distrito implements Comparable<Distrito>{
     }
 
     //endregion
-    //region > nombreDistrito (property)
+
+//region > nombreDistrito (property)
     private String nombreDistrito;
 
     @MemberOrder(sequence = "1")
@@ -64,16 +65,38 @@ public class Distrito implements Comparable<Distrito>{
     public void setNombreDistrito(final String nombreDistrito) {
         this.nombreDistrito = nombreDistrito;
     }
-    //endregion
+//endregion
 
-    //region > compareTo
+//region > remove (action)
+    @ActionLayout(named = "eliminar")
+    @Action(invokeOn=InvokeOn.OBJECT_AND_COLLECTION)
+    public List<Distrito> remove() {
+        container.removeIfNotAlready(this);
+        List d =distritos.listAll();
+        if(d.isEmpty()) {
+            container.informUser("No hay Fiscales cargados");
+        }
+        return d;
 
+    }
+//endregion
+
+//region > compareTo
     @Override
     public int compareTo(final Distrito other) {
         return ObjectContracts.compare(this, other, "nrodistrito");
     }
+//endregion
 
-    //endregion
+//region > injected services
+
+    @javax.inject.Inject
+    Distritos distritos;
+
+    @javax.inject.Inject
+    DomainObjectContainer container;
+
+//endregion
 
 
 }

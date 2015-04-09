@@ -33,7 +33,7 @@ import java.util.List;
                 name = "findByDocument", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Fiscal "
-                        + "WHERE nrodoc ==:doc")
+                        + "WHERE nrodoc.startsWith(:doc)")
 })
 @javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})
 @DomainObject(objectType = "FISCAL")

@@ -29,7 +29,7 @@ import java.math.BigDecimal;
                 name = "findByApellido", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Candidato "
-                        + "WHERE apellido LIKE %:apellido%")
+                        + "WHERE apellido.startsWith(:apellido)")
 })
 @javax.jdo.annotations.Unique(name="CANDIDATO_UNQ", members = {"nombre, apellido"})
 @DomainObject( objectType = "CANDIDATO")

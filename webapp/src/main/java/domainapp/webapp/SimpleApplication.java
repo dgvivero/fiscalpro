@@ -81,7 +81,7 @@ public class SimpleApplication extends IsisWicketApplication {
         super.init();
 
         IBootstrapSettings settings = Bootstrap.getSettings();
-        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Flatly));
+        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Simplex));
     }
 
     @Override

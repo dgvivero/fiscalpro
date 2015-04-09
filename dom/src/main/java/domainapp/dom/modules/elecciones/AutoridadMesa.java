@@ -29,7 +29,7 @@ import javax.jdo.annotations.VersionStrategy;
                 name = "findByDocument", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.AutoridadMesa "
-                        + "WHERE nroDoc =:doc")
+                        + "WHERE nrodoc.startWith(:doc)")
 })
 @javax.jdo.annotations.Unique(name="AUTORIDAD_UNQ", members = {"tipodoc","nrodoc"})
 @DomainObject(

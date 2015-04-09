@@ -3,6 +3,7 @@ package domainapp.dom.modules.elecciones;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 import org.apache.isis.applib.value.Blob;
+import org.isisaddons.wicket.wickedcharts.cpt.applib.WickedChart;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -100,6 +101,16 @@ public class PartidoPolitico implements Comparable<PartidoPolitico> {
     }
 
     //endregion
+
+    private WickedChart chart;
+    @PropertyLayout(hidden = Where.ANYWHERE)
+    @Property(notPersisted = true)
+    public WickedChart getChart() { return chart; }
+    public void setChart(WickedChart chart) { this.chart = chart; }
+
+    public WickedChart showChart() {
+        return getChart();
+    }
 
   // region compareTO
     @Override

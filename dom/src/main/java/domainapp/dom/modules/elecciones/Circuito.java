@@ -1,8 +1,10 @@
 package domainapp.dom.modules.elecciones;
 
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
+import org.isisaddons.wicket.gmap3.cpt.applib.Location;
+import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -27,7 +29,7 @@ import java.util.TreeSet;
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Circuito "),
         @javax.jdo.annotations.Query(
-                name = "findByDocument", language = "JDOQL",
+                name = "findByNro", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Circuito "
                         + "WHERE nroCircuito.startsWith(:nroCircuito)")
@@ -81,9 +83,6 @@ public class Circuito implements  Comparable<Circuito>{
     }
     //endregion
 
-
-
-/*
     //region > mesas (collection)
     @Persistent(mappedBy = "circuito")
     private SortedSet<MesaElectoral> mesas = new TreeSet<MesaElectoral>();
@@ -96,10 +95,31 @@ public class Circuito implements  Comparable<Circuito>{
     public void setMesas(final SortedSet<MesaElectoral> mesas) {
         this.mesas = mesas;
     }
+
+    @ActionLayout(named = "Agregar Mesa")
+    @Action(invokeOn=InvokeOn.COLLECTION_ONLY)
+    public Circuito addMesa(@ParameterLayout(named = "Nro de Mesa") final Integer nroMesa,
+                        @ParameterLayout(named="Dirección")
+                        final String address){
+        final MesaElectoral mesa = container.newTransientInstance(MesaElectoral.class);
+        mesa.setCircuito(this);
+        mesa.setNroMesa(nroMesa);
+        final Location location = this.locationService.lookup(address);
+        mesa.setLocation(location);
+        return this;
+    }
     //endregion
-*/
+
+
+
     @Override
     public int compareTo(final Circuito  other) {
         return ObjectContracts.compare(this, other, "distrito, seccion, nroCircuito");
     }
+
+    //Injections
+    @javax.inject.Inject
+    LocationLookupService locationService;
+    @javax.inject.Inject
+    DomainObjectContainer container;
 }

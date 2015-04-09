@@ -24,6 +24,19 @@ public class AutoridadesMesas {
     }
     //endregion
 
+    //region > listar por dni (action)
+    @ActionLayout(named = "Buscar por dni")
+    @MemberOrder(sequence = "1")
+    public List<AutoridadMesa> listByDNI(final@ParameterLayout(named="Nro de Documento") Long dni) {
+        QueryDefault<AutoridadMesa> query = QueryDefault.create( AutoridadMesa.class,"findByDocument","doc",dni);
+        List<AutoridadMesa> autoridades = container.allMatches(query);
+        if(autoridades.isEmpty()) {
+            container.informUser("No hay ningun autoridad con DNI:"+ dni);
+        }
+        return autoridades;
+    }
+    //endregion
+
     //region > create (action)
     @MemberOrder(sequence = "3")
     @ActionLayout(named = "Crear")
