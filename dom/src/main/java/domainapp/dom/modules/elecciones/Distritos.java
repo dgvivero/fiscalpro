@@ -37,7 +37,7 @@ public class Distritos {
 
 //region > create (action)
     @MemberOrder(sequence = "3")
-    @ActionLayout(named = "Crear")
+    @ActionLayout(named = "Crear  Distrito")
     public Distrito create(
             final @ParameterLayout(named = "Nro de Distrito") int nroDistrito,
             final @ParameterLayout(named = "Nombre Distrito") String nombre) {
