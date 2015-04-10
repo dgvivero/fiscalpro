@@ -9,20 +9,24 @@ import java.util.List;
 /**
  * Created by German on 09/04/2015.
  */
-@DomainService(repositoryFor = AutoridadMesa.class)
-@DomainServiceLayout(menuOrder = "50")
+@DomainService(repositoryFor = Distrito.class)
+@DomainServiceLayout(
+        named="Mesas Electorales",
+        menuBar = DomainServiceLayout.MenuBar.PRIMARY,
+        menuOrder = "4.1"
+)
 public class Distritos {
 
 //region > listAll (action)
     @Action(semantics = SemanticsOf.SAFE )
-    @ActionLayout(named = "Listado")
+    @ActionLayout(named = "Listado de distritos")
     @MemberOrder(sequence = "1")
     public List<Distrito> listAll() {
         QueryDefault<Distrito> query = QueryDefault.create(Distrito.class,"find");
         return container.allMatches(query);
     }
 //endregion
-//region > listar por dni (action)
+//region > listar por nombre (action)
     @ActionLayout(named = "Buscar por nombre")
     @MemberOrder(sequence = "1")
     public List<Distrito> listByDNI(final@ParameterLayout(named="Nombre") String nombre) {
@@ -38,9 +42,10 @@ public class Distritos {
 //region > create (action)
     @MemberOrder(sequence = "3")
     @ActionLayout(named = "Crear  Distrito")
+    @Action(invokeOn=InvokeOn.COLLECTION_ONLY, semantics = SemanticsOf.SAFE)
     public Distrito create(
-            final @ParameterLayout(named = "Nro de Distrito") int nroDistrito,
-            final @ParameterLayout(named = "Nombre Distrito") String nombre) {
+             @ParameterLayout(named = "Nro de Distrito") final int nroDistrito,
+             @ParameterLayout(named = "Nombre Distrito") final String nombre) {
 
         final Distrito dt = container.newTransientInstance(Distrito.class);
         dt.setNroDistrito(nroDistrito);

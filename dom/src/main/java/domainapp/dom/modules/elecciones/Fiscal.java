@@ -135,6 +135,24 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
     }
     //endregion
 
+    //region > mesaElectoral (property)
+    private MesaElectoral mesaElectoral;
+
+    @MemberOrder(sequence = "1")
+    @Column(allowsNull = "true")
+    public MesaElectoral getMesaElectoral() {
+        return mesaElectoral;
+    }
+
+    public void setMesaElectoral(final MesaElectoral mesaElectoral) {
+        this.mesaElectoral = mesaElectoral;
+    }
+    @Programmatic
+    public List<MesaElectoral> autoCompleteMesaElectoral(final @Parameter(regexPattern = "/^[0-9]/") Integer nro) {
+        return mesasElectorales.listByNroMesa(nro);
+    }
+    //endregion
+
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
         // TODO: append to org.apache.isis.applib.util.TitleBuffer, typically value properties
@@ -203,6 +221,9 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
     //Injections
     @javax.inject.Inject
     LocationLookupService locationService;
+
+    @javax.inject.Inject
+    MesasElectorales mesasElectorales;
 
 //endregion
 }

@@ -34,7 +34,7 @@ import java.util.TreeSet;
                         + "FROM domainapp.dom.modules.elecciones.Circuito "
                         + "WHERE nroCircuito.startsWith(:nroCircuito)")
 })
-@javax.jdo.annotations.Unique(name="CIRCUITO_UNQ", members = {"distrito, seccion, nroCircuito"})
+@javax.jdo.annotations.Unique(name="CIRCUITO_UNQ", members = {"distrito", "seccion", "nroCircuito"})
 @DomainObject(
         objectType = "CIRCUITO"
 )

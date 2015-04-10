@@ -6,8 +6,11 @@ import org.apache.isis.applib.util.ObjectContracts;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by German on 24/03/2015.
@@ -28,7 +31,7 @@ import java.util.List;
         @javax.jdo.annotations.Query(
                 name = "findByName", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM domainapp.dom.modules.elecciones.Distrito"
+                        + "FROM domainapp.dom.modules.elecciones.Distrito "
                         + "WHERE nombreDistrito.startsWith(:nombreDistrito)")
 })
 @javax.jdo.annotations.Unique(name="DISTRITO_UNQ", members = {"nrodistrito"})
@@ -55,7 +58,7 @@ public class Distrito implements Comparable<Distrito>{
 //region > nombreDistrito (property)
     private String nombreDistrito;
 
-    @MemberOrder(sequence = "1")
+    @MemberOrder(sequence = "2")
     @Column(allowsNull = "false")
     @Title
     public String getNombreDistrito() {
@@ -66,21 +69,65 @@ public class Distrito implements Comparable<Distrito>{
         this.nombreDistrito = nombreDistrito;
     }
 //endregion
+/*
+    //region > Secciones (collection)
+    @Persistent(mappedBy = "distrito")
+    private SortedSet<Seccion> Secciones = new TreeSet<Seccion>();
+
+    @MemberOrder(name = "Secciones", sequence = "3")
+    public SortedSet<Seccion> getSecciones() {
+        return Secciones;
+    }
+
+    public void setSecciones(final SortedSet<Seccion> Secciones) {
+        this.Secciones = Secciones;
+    }
+
+    //region > addSeccion (action)
+    @MemberOrder(name = "Secciones", sequence = "1")
+    @ActionLayout(named = "agregar Seccion")
+    @Action(invokeOn=InvokeOn.COLLECTION_ONLY)
+    public Distrito addToSecciones(@ParameterLayout(named = "Nro de Seccion") final Integer nroSeccion) {
+        final Seccion se = container.newTransientInstance(Seccion.class);
+        se.setDistrito(this);
+        se.setNroSeccion(nroSeccion);
+        getSecciones().add(se);
+        container.persistIfNotAlready(se);
+        return this;
+    }
+
+    @MemberOrder(name = "Secciones", sequence = "2")
+    @ActionLayout(named = "eliminar seccion", cssClass = "x-caution")
+    @Action(invokeOn=InvokeOn.COLLECTION_ONLY)
+    public Distrito removeFromSecciones(final Seccion seccion) {
+       getSecciones().remove(seccion);
+        container.informUser("Se ha eliminado la seccion" + seccion.title());
+        return this;
+    }
+    public boolean hideRemoveFromSecciones() {
+        return getSecciones().isEmpty();
+    }
+
+    //endregion
+
 
 //region > remove (action)
-    @ActionLayout(named = "eliminar")
+    @ActionLayout(named = "eliminar Distrito")
     @Action(invokeOn=InvokeOn.OBJECT_AND_COLLECTION)
     public List<Distrito> remove() {
         container.removeIfNotAlready(this);
         List d =distritos.listAll();
         if(d.isEmpty()) {
-            container.informUser("No hay Fiscales cargados");
+            container.informUser("No hay Distritos cargados");
         }
         return d;
 
     }
+    public boolean hideRemove() {
+        return distritos.listAll().isEmpty();
+    }
 //endregion
-
+*/
 //region > compareTo
     @Override
     public int compareTo(final Distrito other) {

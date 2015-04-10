@@ -30,7 +30,7 @@ import java.util.TreeSet;
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Seccion "),
         @javax.jdo.annotations.Query(
-                name = "findByDocument", language = "JDOQL",
+                name = "findByNumber", language = "JDOQL",
                 value = "SELECT "
                         + "FROM domainapp.dom.modules.elecciones.Seccion "
                         + "WHERE nroSeccion.startsWith(:nroSeccion)")
@@ -58,7 +58,7 @@ public class Seccion implements Comparable<Seccion> {
     private String descripcion;
 
     @MemberOrder(sequence = "1")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     public String getDescripcion() {
         return descripcion;
     }
@@ -67,10 +67,6 @@ public class Seccion implements Comparable<Seccion> {
         this.descripcion = descripcion;
     }
     //endregion
-
-      /*todo : Agregar coleccion de mesas
-      *
-      */
 
     //region > Distrito (property)
     private Distrito distrito;
@@ -88,9 +84,10 @@ public class Seccion implements Comparable<Seccion> {
         return contenedor.uniqueMatch(Distrito.class, "Capital Federal");
     }
     //endregion
-
+/*
     //region > circuitos (collection)
     @Persistent(mappedBy = "seccion")
+    @Column(allowsNull = "True")
     private SortedSet<Circuito> circuitos = new TreeSet<Circuito>();
 
     @MemberOrder(sequence = "1")
@@ -102,7 +99,7 @@ public class Seccion implements Comparable<Seccion> {
         this.circuitos = circuitos;
     }
     //endregion
-
+*/
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
         // TODO: append to org.apache.isis.applib.util.TitleBuffer, typically value properties

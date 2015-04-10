@@ -31,7 +31,7 @@ import java.math.BigDecimal;
                         + "FROM domainapp.dom.modules.elecciones.Candidato "
                         + "WHERE apellido.startsWith(:apellido)")
 })
-@javax.jdo.annotations.Unique(name="CANDIDATO_UNQ", members = {"nombre, apellido"})
+@javax.jdo.annotations.Unique(name="CANDIDATO_UNQ", members = {"nombre", "apellido"})
 @DomainObject( objectType = "CANDIDATO")
 public class Candidato implements Comparable<Candidato> {
 

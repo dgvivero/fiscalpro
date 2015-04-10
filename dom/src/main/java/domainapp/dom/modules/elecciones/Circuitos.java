@@ -9,13 +9,17 @@ import java.util.List;
 /**
  * Created by German on 09/04/2015.
  */
-@DomainService(repositoryFor = AutoridadMesa.class)
-@DomainServiceLayout(menuOrder = "60")
+@DomainService(repositoryFor = Circuito.class)
+@DomainServiceLayout(
+        named="Mesas Electorales",
+        menuBar = DomainServiceLayout.MenuBar.PRIMARY,
+        menuOrder = "4.4"
+)
 public class Circuitos {
 
 //region > listAll (action)
     @Action(semantics = SemanticsOf.SAFE )
-    @ActionLayout(named = "Listado")
+    @ActionLayout(named = "Listado de circuitos")
     @MemberOrder(sequence = "1")
     public List<Circuito> listAll() {
         QueryDefault<Circuito> query = QueryDefault.create(Circuito.class,"find");
@@ -24,7 +28,7 @@ public class Circuitos {
 //endregion
 //region > listar por dni (action)
     @ActionLayout(named = "Buscar por Nro")
-    @MemberOrder(sequence = "1")
+    @MemberOrder(sequence = "2")
     public List<Circuito> listByDNI(final@ParameterLayout(named="Nombre") Integer nro) {
         QueryDefault<Circuito> query = QueryDefault.create( Circuito.class,"findByNro","nro",nro);
         List<Circuito> circuito = container.allMatches(query);
@@ -35,9 +39,10 @@ public class Circuitos {
     }
 //endregion
 
-    //region > create (action)
+//region > create (action)
     @MemberOrder(sequence = "3")
-    @ActionLayout(named = "Crear")
+    @ActionLayout(named = "Crear circuito")
+    @Action(invokeOn=InvokeOn.COLLECTION_ONLY)
     public Circuito create(
             final @ParameterLayout(named = "Distrito") Distrito distrito,
             final @ParameterLayout(named = "Sección") Seccion seccion,

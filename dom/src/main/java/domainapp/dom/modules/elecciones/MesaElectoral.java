@@ -9,7 +9,10 @@ import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by German Vivero on 31/03/2015.
@@ -42,7 +45,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
 
-        buf.append("Circuito " + circuito + " - ");
+        buf.append("Seccion " + circuito.getSeccion().getNroSeccion() + " - " + "Circuito "+ circuito.getNroCircuito()+" - ");
         buf.concat("Mesa " + nroMesa);
         return buf.toString();
     }
@@ -77,11 +80,24 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     }
     //endregion
 
+    //region > fiscales (collection)
+    @Persistent(mappedBy = "mesaElectoral")
+    private SortedSet<Fiscal> fiscales = new TreeSet<Fiscal>();
+
+    public SortedSet<Fiscal> getFiscales() {
+        return fiscales;
+    }
+
+    public void setFiscales(final SortedSet<Fiscal> fiscales) {
+        this.fiscales = fiscales;
+    }
+    //endregion
+
     //region > votosBlancos (property)
     private Integer votosBlancos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "1")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getVotosBlancos() {
         return votosBlancos;
@@ -100,7 +116,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     private Integer votosNulos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "2")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getVotosNulos() {
         return votosNulos;
@@ -119,7 +135,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     private Integer votosRecurridos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "3")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getVotosRecurridos() {
         return votosRecurridos;
@@ -138,7 +154,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     private Integer votosIdentidadInpugnada;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "4")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getVotosIdentidadInpugnada() {
         return votosIdentidadInpugnada;
@@ -157,7 +173,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     private Integer votantesConcurrentes;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "5")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getVotantesConcurrentes() {
         return votantesConcurrentes;
@@ -176,7 +192,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     private Integer sobresUtilizados;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "6")
-    @Column(allowsNull = "False")
+    @Column(allowsNull = "True")
     @Property(regexPattern = "/^[0-9]/")
     public Integer getSobresUtilizados() {
         return sobresUtilizados;
@@ -198,6 +214,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
             optionality = Optionality.OPTIONAL
     )
     @MemberOrder(sequence="3")
+    @Column(allowsNull = "True")
     public Location getLocation() {
         return locationLatitude != null && locationLongitude != null? new Location(locationLatitude, locationLongitude): null;
     }
