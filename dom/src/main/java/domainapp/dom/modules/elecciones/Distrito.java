@@ -19,7 +19,7 @@ import java.util.TreeSet;
 @javax.jdo.annotations.PersistenceCapable(identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
         strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
-        column="nroDistrito")
+        column="id_distrito")
 @javax.jdo.annotations.Version(
         strategy= VersionStrategy.VERSION_NUMBER,
         column="version")
@@ -69,7 +69,7 @@ public class Distrito implements Comparable<Distrito>{
         this.nombreDistrito = nombreDistrito;
     }
 //endregion
-/*
+
     //region > Secciones (collection)
     @Persistent(mappedBy = "distrito")
     private SortedSet<Seccion> Secciones = new TreeSet<Seccion>();
@@ -127,7 +127,7 @@ public class Distrito implements Comparable<Distrito>{
         return distritos.listAll().isEmpty();
     }
 //endregion
-*/
+
 //region > compareTo
     @Override
     public int compareTo(final Distrito other) {
