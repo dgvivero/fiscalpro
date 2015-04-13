@@ -19,7 +19,7 @@ import java.util.TreeSet;
 @javax.jdo.annotations.PersistenceCapable(identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
         strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
-        column="id_distrito")
+        column="nroDistrito")
 @javax.jdo.annotations.Version(
         strategy= VersionStrategy.VERSION_NUMBER,
         column="version")
@@ -34,23 +34,23 @@ import java.util.TreeSet;
                         + "FROM domainapp.dom.modules.elecciones.Distrito "
                         + "WHERE nombreDistrito.startsWith(:nombreDistrito)")
 })
-@javax.jdo.annotations.Unique(name="DISTRITO_UNQ", members = {"nrodistrito"})
+@javax.jdo.annotations.Unique(name="DISTRITO_UNQ", members = {"nroDistrito"})
 @DomainObject(
         objectType = "DISTRITO"
 )
 public class Distrito implements Comparable<Distrito>{
 
     //region > nrodistrito (property)
-    private int nrodistrito;
+    private int nroDistrito;
 
     @MemberOrder(sequence = "1")
     @Column(allowsNull = "False")
     public int getNroDistrito() {
-        return nrodistrito;
+        return nroDistrito;
     }
 
-    public void setNroDistrito(final int nrodistrito) {
-        this.nrodistrito = nrodistrito;
+    public void setNroDistrito(final int nroDistrito) {
+        this.nroDistrito = nroDistrito;
     }
 
     //endregion

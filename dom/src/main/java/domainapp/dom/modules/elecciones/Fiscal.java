@@ -1,9 +1,12 @@
 package domainapp.dom.modules.elecciones;
 
+import com.google.common.collect.Lists;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 import org.apache.isis.applib.util.TitleBuffer;
+import org.isisaddons.module.security.dom.user.ApplicationUser;
+import org.isisaddons.module.security.dom.user.ApplicationUsers;
 import org.isisaddons.wicket.gmap3.cpt.applib.Locatable;
 import org.isisaddons.wicket.gmap3.cpt.applib.Location;
 import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
@@ -11,7 +14,8 @@ import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
-import java.util.List;
+import java.util.*;
+import java.util.Collection;
 
 
 /**
@@ -38,6 +42,27 @@ import java.util.List;
 @javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})
 @DomainObject(objectType = "FISCAL")
 public class Fiscal implements Comparable<Fiscal>, Locatable {
+
+
+    //region > usuario (property)
+
+    private ApplicationUser usuario;
+
+    @MemberOrder(sequence = "1")
+    @Column(allowsNull = "True")
+    public ApplicationUser getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(final ApplicationUser usuario) {
+        this.usuario = usuario;
+    }
+
+    @Programmatic
+    public Collection<ApplicationUser> autoCompleteUsuario(final String search) {
+        return usuarios.autoComplete(search);
+    }
+    //endregion
 
     public enum TipoDocumento {
         DNI, LE, LC, CI
@@ -224,6 +249,9 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
 
     @javax.inject.Inject
     MesasElectorales mesasElectorales;
+
+    @javax.inject.Inject
+    ApplicationUsers usuarios;
 
 //endregion
 }

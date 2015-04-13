@@ -28,7 +28,7 @@ import java.util.TreeSet;
         @javax.jdo.annotations.Query(
                 name = "find", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM domainapp.dom.modules.elecciones.Seccion "),
+                        + "FROM domainapp.dom.modules.elecciones.Seccion"),
         @javax.jdo.annotations.Query(
                 name = "findByNumber", language = "JDOQL",
                 value = "SELECT "
@@ -77,14 +77,15 @@ public class Seccion implements Comparable<Seccion> {
         return distrito;
     }
 
-    public void setDistrito(final Distrito Distrito) {
+    public void setDistrito(final Distrito distrito) {
         this.distrito = distrito;
     }
+
     public Distrito defaultDistrito() {
-        return contenedor.uniqueMatch(Distrito.class, "Capital Federal");
+        return distritos.listByDNI("Capital Federal").get(0);
     }
     //endregion
-/*
+
     //region > circuitos (collection)
     @Persistent(mappedBy = "seccion")
     @Column(allowsNull = "True")
@@ -99,7 +100,7 @@ public class Seccion implements Comparable<Seccion> {
         this.circuitos = circuitos;
     }
     //endregion
-*/
+
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
         // TODO: append to org.apache.isis.applib.util.TitleBuffer, typically value properties
@@ -122,6 +123,9 @@ public class Seccion implements Comparable<Seccion> {
     //region  >  (injected)
     @javax.inject.Inject
     private DomainObjectContainer contenedor;
+
+    @javax.inject.Inject
+    private Distritos distritos;
     //endregion
 
 

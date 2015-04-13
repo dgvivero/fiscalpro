@@ -37,35 +37,35 @@ public class Candidato implements Comparable<Candidato> {
 
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
-        buf.append(apellido + ", "+ nombre + " - "+partido.getNombrePartido());
+        buf.append(apellidoCandidato + ", "+ nombreCandidato + " - "+partido.getNombrePartido());
         return buf.toString();
     }
 
   //region > nombre (property)
-    private String nombre;
+    private String nombreCandidato;
 
     @MemberOrder(sequence = "1")
     @Column(allowsNull = "False")
     public String getNombreCandidato() {
-        return nombre;
+        return nombreCandidato;
     }
 
     public void setNombreCandidato(final String nombre) {
-        this.nombre = nombre;
+        this.nombreCandidato = nombre;
     }
   //endregion
 
   //region > apellido (property)
-    private String apellido;
+    private String apellidoCandidato;
 
     @MemberOrder(sequence = "2")
     @Column(allowsNull = "False")
     public String getApellidoCandidato() {
-        return apellido;
+        return apellidoCandidato;
     }
 
     public void setApellidoCandidato(final String apellido) {
-        this.apellido = apellido;
+        this.apellidoCandidato = apellido;
     }
   //endregion
 
@@ -154,7 +154,7 @@ public class Candidato implements Comparable<Candidato> {
     // region compareTO
      @Override
      public int compareTo(final Candidato other) {
-        return ObjectContracts.compare(this, other, "nombre, apellido");
+        return ObjectContracts.compare(this, other, "nombreCandidato, apellidoCandidato");
     }
    //endregion
 }
