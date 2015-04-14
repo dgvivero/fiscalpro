@@ -40,21 +40,8 @@ import java.util.TreeSet;
 )
 public class Circuito implements  Comparable<Circuito>{
 
-    //region > distrito (property)
-    private Distrito distrito;
 
-    @MemberOrder(sequence = "1")
-    @Column(allowsNull = "False")
-    public Distrito getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(final Distrito distrito) {
-        this.distrito = distrito;
-    }
-    //endregion
-
-    //region > seccion (property)
+ //region > seccion (property)
     private Seccion seccion;
 
     @MemberOrder(sequence = "2")
@@ -66,10 +53,10 @@ public class Circuito implements  Comparable<Circuito>{
     public void setSeccion(final Seccion seccion) {
         this.seccion = seccion;
     }
-    //endregion
+//endregion
 
 
-    //region > nroCircuito (property)
+//region > nroCircuito (property)
     private Integer nroCircuito;
 
     @MemberOrder(sequence = "3")
@@ -81,35 +68,7 @@ public class Circuito implements  Comparable<Circuito>{
     public void setNroCircuito(final Integer nroCircuito) {
         this.nroCircuito = nroCircuito;
     }
-    //endregion
-
-    //region > mesas (collection)
-    @Persistent(mappedBy = "circuito")
-    private SortedSet<MesaElectoral> mesas = new TreeSet<MesaElectoral>();
-
-    @MemberOrder(sequence = "1")
-    public SortedSet<MesaElectoral> getMesas() {
-        return mesas;
-    }
-
-    public void setMesas(final SortedSet<MesaElectoral> mesas) {
-        this.mesas = mesas;
-    }
-
-    @ActionLayout(named = "Agregar Mesa")
-    @Action(invokeOn=InvokeOn.COLLECTION_ONLY)
-    public Circuito addMesa(@ParameterLayout(named = "Nro de Mesa") final Integer nroMesa,
-                        @ParameterLayout(named="Dirección")
-                        final String address){
-        final MesaElectoral mesa = container.newTransientInstance(MesaElectoral.class);
-        mesa.setCircuito(this);
-        mesa.setNroMesa(nroMesa);
-        final Location location = this.locationService.lookup(address);
-        mesa.setLocation(location);
-        return this;
-    }
-    //endregion
-
+//endregion
 
 
     @Override
@@ -117,7 +76,7 @@ public class Circuito implements  Comparable<Circuito>{
         return ObjectContracts.compare(this, other, "distrito, seccion, nroCircuito");
     }
 
-    //Injections
+//Injections
     @javax.inject.Inject
     LocationLookupService locationService;
     @javax.inject.Inject

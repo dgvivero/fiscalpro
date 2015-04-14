@@ -40,7 +40,25 @@ import java.util.TreeSet;
 
 public class Seccion implements Comparable<Seccion> {
 
-    //region > nroSeccion (property)
+//region > Distrito (property)
+    private Distrito distrito;
+
+    @MemberOrder(sequence = "3")
+    @Column(allowsNull = "False")
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(final Distrito distrito) {
+        this.distrito = distrito;
+    }
+
+    public Distrito defaultDistrito() {
+        return distritos.listByDNI("Capital Federal").get(0);
+    }
+ //endregion
+
+ //region > nroSeccion (property)
     private Integer nroSeccion;
 
     @MemberOrder(sequence = "1")
@@ -68,23 +86,6 @@ public class Seccion implements Comparable<Seccion> {
     }
     //endregion
 
-    //region > Distrito (property)
-    private Distrito distrito;
-
-    @MemberOrder(sequence = "3")
-    @Column(allowsNull = "False")
-    public Distrito getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(final Distrito distrito) {
-        this.distrito = distrito;
-    }
-
-    public Distrito defaultDistrito() {
-        return distritos.listByDNI("Capital Federal").get(0);
-    }
-    //endregion
 
     //region > circuitos (collection)
     @Persistent(mappedBy = "seccion")
