@@ -48,7 +48,7 @@ public class MesasElectorales {
 
      final MesaElectoral mesa = container.newTransientInstance(MesaElectoral.class);
      Circuito c = container.firstMatch(Circuito.class, circuito.toString());
-     mesa.setCircuito(c);
+     mesa.getEstablecimiento().setCircuito(c);
      mesa.setNroMesa(numeroMesa);
      container.persistIfNotAlready(mesa);
      return mesa;

@@ -1,5 +1,6 @@
 package domainapp.dom.modules.elecciones;
 
+import com.google.common.util.concurrent.ListenableFutureTask;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 import org.apache.isis.applib.value.Blob;
@@ -101,6 +102,29 @@ public class PartidoPolitico implements Comparable<PartidoPolitico> {
         this.candidatos = candidatos;
     }
 
+    //endregion
+
+    //region > listasInternas (collection)
+
+    @Persistent(mappedBy = "partido")
+    private SortedSet<ListaInterna> listas = new TreeSet<ListaInterna>();
+
+    public SortedSet<ListaInterna> getListas() {
+        return listas;
+    }
+
+    public void setListas(final SortedSet<ListaInterna> listas) {
+        this.listas = listas;
+    }
+
+    public PartidoPolitico agregarListas(ListaInterna lista){
+        getListas().add(lista);
+        return this;
+    }
+    public PartidoPolitico quitarListas(ListaInterna lista){
+        getListas().remove(lista);
+        return this;
+    }
     //endregion
 
     private WickedChart chart;

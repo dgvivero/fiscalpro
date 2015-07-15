@@ -51,7 +51,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     }
    // endregion
 
-    //region > circuito (property)
+    //region > establecimiento (property)
     private Establecimiento establecimiento;
 
     @MemberOrder(name="General", sequence = "3")

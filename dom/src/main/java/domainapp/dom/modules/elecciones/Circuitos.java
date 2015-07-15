@@ -49,7 +49,7 @@ public class Circuitos {
             final @ParameterLayout(named = "Nro") Integer nro) {
 
         final Circuito cr = container.newTransientInstance(Circuito.class);
-        cr.setDistrito(distrito);
+        cr.getSeccion().setDistrito(distrito);
         cr.setSeccion(seccion);
         cr.setNroCircuito(nro);
         container.persistIfNotAlready(cr);
