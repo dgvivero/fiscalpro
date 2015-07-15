@@ -32,7 +32,7 @@ import java.util.TreeSet;
         @javax.jdo.annotations.Query(
                 name = "findByNroMesa", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM domainapp.dom.modules.elecciones.MsaElectoral "
+                        + "FROM domainapp.dom.modules.elecciones.MesaElectoral "
                         + "WHERE nromesa.startsWith(:nromesa)")
 })
 @javax.jdo.annotations.Unique(name="MESAELECTORAL_UNQ", members = {"nroMesa"})
@@ -45,23 +45,23 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
 
-        buf.append("Seccion " + circuito.getSeccion().getNroSeccion() + " - " + "Circuito "+ circuito.getNroCircuito()+" - ");
+        buf.append("Seccion " + establecimiento.getCircuito().getSeccion().getNroSeccion() + " - " + "Circuito "+ establecimiento.getCircuito().getNroCircuito()+" - ");
         buf.concat("Mesa " + nroMesa);
         return buf.toString();
     }
    // endregion
 
     //region > circuito (property)
-    private Circuito circuito;
+    private Establecimiento establecimiento;
 
     @MemberOrder(name="General", sequence = "3")
     @Column(allowsNull = "False")
-    public Circuito getCircuito() {
-        return circuito;
+    public Establecimiento getEstablecimiento() {
+        return establecimiento;
     }
 
-    public void setCircuito(final Circuito circuito) {
-        this.circuito = circuito;
+    public void setEstablecimiento(final Establecimiento establecimiento) {
+        this.establecimiento = establecimiento;
     }
 
     //endregion
