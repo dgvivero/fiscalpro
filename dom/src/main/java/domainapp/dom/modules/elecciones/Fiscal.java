@@ -11,9 +11,7 @@ import org.isisaddons.wicket.gmap3.cpt.applib.Locatable;
 import org.isisaddons.wicket.gmap3.cpt.applib.Location;
 import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.VersionStrategy;
+import javax.jdo.annotations.*;
 import java.util.*;
 import java.util.Collection;
 
@@ -23,9 +21,11 @@ import java.util.Collection;
  */
 @javax.jdo.annotations.PersistenceCapable(identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
-        strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
+        strategy= IdGeneratorStrategy.NATIVE,
         column="id_fiscal")
-@javax.jdo.annotations.Version(
+@javax.jdo.annotations.Inheritance(
+        strategy = InheritanceStrategy.NEW_TABLE)
+/*@javax.jdo.annotations.Version(
         strategy= VersionStrategy.VERSION_NUMBER,
         column="version")
 @javax.jdo.annotations.Queries({
@@ -39,12 +39,12 @@ import java.util.Collection;
                         + "FROM domainapp.dom.modules.elecciones.Fiscal "
                         + "WHERE nrodoc.startsWith(:doc)")
 })
-@javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})
+@javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})*/
 @DomainObject(objectType = "FISCAL")
-public class Fiscal implements Comparable<Fiscal>, Locatable {
+public class Fiscal extends ApplicationUser implements  Locatable {
 
 
-    //region > usuario (property)
+    /* region > usuario (property)
 
     private ApplicationUser usuario;
 
@@ -62,7 +62,7 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
     public Collection<ApplicationUser> autoCompleteUsuario(final String search) {
         return usuarios.autoComplete(search);
     }
-    //endregion
+    endregion */
 
     public enum TipoDocumento {
         DNI, LE, LC, CI
@@ -180,7 +180,6 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
 
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
-        // TODO: append to org.apache.isis.applib.util.TitleBuffer, typically value properties
         buf.append(apellido);
         buf.append(", ");
         buf.append(nombre);
@@ -215,10 +214,10 @@ public class Fiscal implements Comparable<Fiscal>, Locatable {
 //endregion
 
 
-    @Override
+    /*@Override
     public int compareTo(final Fiscal other) {
         return ObjectContracts.compare(this, other, "nrodoc");
-    }
+    }*/
 
 
     //region > remove (action)
