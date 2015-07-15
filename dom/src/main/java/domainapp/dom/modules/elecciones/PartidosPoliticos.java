@@ -68,16 +68,17 @@ public class PartidosPoliticos {
      @Action(
             semantics = SemanticsOf.SAFE
     )
+     @ActionLayout(named = "Grafico de Torta")
     public WickedChart showPieChart() {
 
         Map<String, BigDecimal> byPartido = Maps.newTreeMap();
         List<PartidoPolitico> allPartidos =listAll();
         for (PartidoPolitico partido : allPartidos) {
             String nombrePartido = partido.getNombrePartido();
-            BigDecimal integer = partido.getTotalBocaDeUrna();
-            if(integer == null) {
-                integer = new BigDecimal(1);
-            }
+           // BigDecimal integer = partido.getTotalBocaDeUrna();
+            //if(integer == null) {
+             //   integer = new BigDecimal(1);
+            //}
             byPartido.put(nombrePartido, BigDecimal.valueOf(50));
 
         }

@@ -17,3 +17,11 @@
  *  under the License.
  */
 
+body {
+  margin: 0;
+  background-image: url("/images/bg3.jpg");
+  background-color: #000000;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right bottom;
+}

@@ -57,87 +57,11 @@ public class HomePageViewModel {
     }
     //endregion
 
-  /* @Action(
-            semantics = SemanticsOf.SAFE
-    )
-    public WickedChart getPieChart() {
-
-        Map<String, BigDecimal> byPartido = Maps.newTreeMap();
-        List<PartidoPolitico> allPartidos = partidos.listAll();
-        for (PartidoPolitico partido : allPartidos) {
-            String nombrePartido = partido.getNombrePartido();
-            BigDecimal integer = partido.getTotalBocaDeUrna();
-            if(integer == null) {
-                integer = new BigDecimal(1);
-            }
-            byPartido.put(nombrePartido, integer);
-
-        }
-
-        return new WickedChart(new PieWithGradientOptions(byPartido));
-    }
-
-    public static class PieWithGradientOptions extends Options {
-        private static final long serialVersionUID = 1L;
-
-        public PieWithGradientOptions(Map<String, BigDecimal> byCategory) {
-
-            setChartOptions(new ChartOptions()
-                    .setPlotBackgroundColor(new NullColor())
-                    .setPlotBorderWidth(null)
-                    .setPlotShadow(Boolean.FALSE));
-
-            setTitle(new Title("Votos por Partido"));
-
-            PercentageFormatter formatter = new PercentageFormatter();
-            setTooltip(
-                    new Tooltip()
-                            .setFormatter(
-                                    formatter)
-                            .       setPercentageDecimals(1));
-
-            setPlotOptions(new PlotOptionsChoice()
-                    .setPie(new PlotOptions()
-                            .setAllowPointSelect(Boolean.TRUE)
-                            .setCursor(Cursor.POINTER)
-                            .setDataLabels(new DataLabels()
-                                    .setEnabled(Boolean.TRUE)
-                                    .setColor(new HexColor("#000000"))
-                                    .setConnectorColor(new HexColor("#000000"))
-                                    .setFormatter(formatter))));
-
-            Series<Point> series = new PointSeries()
-                    .setType(SeriesType.PIE);
-            int i=0;
-            for (Map.Entry<String, BigDecimal> entry : byCategory.entrySet()) {
-                series
-                        .addPoint(
-                                new Point(entry.getKey(), entry.getValue()).setColor(
-                                        new RadialGradient()
-                                                .setCx(0.5)
-                                                .setCy(0.3)
-                                                .setR(0.7)
-                                                .addStop(0, new HighchartsColor(i))
-                                                .addStop(1, new HighchartsColor(i).brighten(-0.3f))));
-                i++;
-            }
-            addSeries(series);
-        }
-    }
-*/
    @Action(
             semantics = SemanticsOf.SAFE
     )
      public List<Fiscal> getFiscales() {
         return fiscales.listAll();
-    }
-
-    @Action(
-            semantics = SemanticsOf.SAFE
-    )
-    public WickedChart getGraficoPorPartido() {
-
-        return partidos.showPieChart();
     }
 
   //region > injected services

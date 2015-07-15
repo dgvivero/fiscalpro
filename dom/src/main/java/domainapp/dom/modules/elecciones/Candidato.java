@@ -98,6 +98,7 @@ public class Candidato implements Comparable<Candidato> {
     }
    //endregion
 
+  /*
   //region > votosBocaDeUrna (property)
     private Integer votosBocaDeUrna;
 
@@ -122,6 +123,8 @@ public class Candidato implements Comparable<Candidato> {
     @Property(notPersisted = true)
     public BigDecimal getTotalVotosBocaDeUrna(){return BigDecimal.valueOf(votosBocaDeUrna);}
     //endregion
+
+    */
 
     //region > votosOficiales (property)
     private Integer votosOficiales;

@@ -81,9 +81,11 @@ public class Seccion implements Comparable<Seccion> {
         this.distrito = distrito;
     }
 
+    /*
     public Distrito defaultDistrito() {
         return distritos.listByDNI("Capital Federal").get(0);
     }
+    */
     //endregion
 
     //region > circuitos (collection)
@@ -103,7 +105,6 @@ public class Seccion implements Comparable<Seccion> {
 
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
-        // TODO: append to org.apache.isis.applib.util.TitleBuffer, typically value properties
         buf.append("Seccion : ");
         buf.concat(nroSeccion);
         buf.concat(" - ");

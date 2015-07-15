@@ -78,7 +78,7 @@ public class PartidoPolitico implements Comparable<PartidoPolitico> {
         return BigDecimal.valueOf(votos);
     }
 
-    @Property(notPersisted = true)
+/*    @Property(notPersisted = true)
     public BigDecimal getTotalBocaDeUrna(){
         Integer votos = new Integer(0);
         for (Candidato candidato : candidatos) {
@@ -87,6 +87,7 @@ public class PartidoPolitico implements Comparable<PartidoPolitico> {
         return BigDecimal.valueOf(votos);
     }
     //endregion
+    */
 
     //region > candidatos (collection)
     @Persistent(mappedBy = "partido")
