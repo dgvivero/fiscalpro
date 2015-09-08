@@ -25,9 +25,11 @@ import java.util.Collection;
         column="id_fiscal")
 @javax.jdo.annotations.Inheritance(
         strategy = InheritanceStrategy.NEW_TABLE)
-/*@javax.jdo.annotations.Version(
+/**
+@javax.jdo.annotations.Version(
         strategy= VersionStrategy.VERSION_NUMBER,
         column="version")
+        **/
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = "find", language = "JDOQL",
@@ -39,7 +41,7 @@ import java.util.Collection;
                         + "FROM domainapp.dom.modules.elecciones.Fiscal "
                         + "WHERE nrodoc.startsWith(:doc)")
 })
-@javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})*/
+@javax.jdo.annotations.Unique(name="FISCAL_UNQ", members = {"tipodoc","nrodoc"})
 @DomainObject(objectType = "FISCAL")
 public class Fiscal extends ApplicationUser implements  Locatable {
 

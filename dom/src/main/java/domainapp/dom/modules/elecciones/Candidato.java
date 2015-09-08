@@ -37,7 +37,7 @@ public class Candidato implements Comparable<Candidato> {
 
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
-        buf.append(apellidoCandidato + ", "+ nombreCandidato + " - "+partido.getNombrePartido());
+        buf.append(apellidoCandidato);
         return buf.toString();
     }
 
