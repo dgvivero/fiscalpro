@@ -165,12 +165,6 @@
         <servlet-name>Resource</servlet-name>
         <url-pattern>*.swf</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Resource</servlet-name>
-        <url-pattern>crossdomain.xml</url-pattern>
-    </servlet-mapping>
-    
-
 
     <!--
     -

@@ -81,7 +81,7 @@ public class SimpleApplication extends IsisWicketApplication {
         super.init();
 
         IBootstrapSettings settings = Bootstrap.getSettings();
-        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Darkly));
+        settings.setThemeProvider(new BootswatchThemeProvider(BootswatchTheme.Yeti));
     }
 
     @Override
@@ -130,8 +130,8 @@ public class SimpleApplication extends IsisWicketApplication {
                 bind(String.class).annotatedWith(Names.named("welcomeMessage")).toInstance(readLines(getClass(), "welcome.html"));
                 bind(String.class).annotatedWith(Names.named("aboutMessage")).toInstance("Acerca de Fiscalizador");
                 bind(InputStream.class).annotatedWith(Names.named("metaInfManifest")).toProvider(Providers.of(getServletContext().getResourceAsStream("/META-INF/MANIFEST.MF")));
-                bind(String.class).annotatedWith(Names.named("brandLogoHeader")).toInstance("/images/logo_chuby.png");
-                bind(String.class).annotatedWith(Names.named("brandLogoSignin")).toInstance("/images/logo_chuby.png");
+                bind(String.class).annotatedWith(Names.named("brandLogoHeader")).toInstance("/images/massa_logo.png");
+                bind(String.class).annotatedWith(Names.named("brandLogoSignin")).toInstance("/images/massa_logo.png");
             }
         };
 
