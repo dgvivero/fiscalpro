@@ -3,7 +3,14 @@ package domainapp.dom.modules.elecciones;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.QueryDefault;
+import org.isisaddons.module.security.dom.role.ApplicationRole;
+import org.isisaddons.module.security.dom.role.ApplicationRoles;
+import org.isisaddons.module.security.dom.user.AccountType;
+import org.isisaddons.module.security.dom.user.ApplicationUser;
+import org.isisaddons.module.security.dom.user.ApplicationUserStatus;
+import org.isisaddons.module.security.seed.scripts.IsisModuleSecurityRegularUserRoleAndPermissions;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -54,7 +61,14 @@ public class Fiscales {
             final @ParameterLayout(named = "Apellido") String apellido,
             final @ParameterLayout(named="Nombre") String nombre,
             final @ParameterLayout(named="Telefono") String telefono,
-            final @ParameterLayout(named = "Cargo") Fiscal.TipoFiscal tf) {
+            final @ParameterLayout(named = "Cargo") Fiscal.TipoFiscal tf,
+            @Parameter(maxLength = ApplicationUser.MAX_LENGTH_USERNAME)
+            @ParameterLayout(named="Usuario")
+            final String username,
+            @Parameter(optionality = Optionality.OPTIONAL)
+            @ParameterLayout(named="Rol inicial")
+            final ApplicationRole initialRole,
+            final @ParameterLayout(named="Contraseña") String passwd) {
 
         final Fiscal f = container.newTransientInstance(Fiscal.class);
         f.setTipoDocumento(tdoc);
@@ -63,17 +77,33 @@ public class Fiscales {
         f.setNombre(nombre);
         f.setTelefono(telefono);
         f.setCargo(tf);
+        f.setUsername(username);
+        f.setStatus(ApplicationUserStatus.ENABLED);
+        f.setAccountType(AccountType.LOCAL);
+        if(initialRole != null) {
+            f.addRole(initialRole);
+        }
+
+        f.setEncryptedPassword(passwd);
         container.persistIfNotAlready(f);
         return f;
     }
+
+    public ApplicationRole default7Create() {
+        return applicationRoles.findRoleByName(IsisModuleSecurityRegularUserRoleAndPermissions.ROLE_NAME);
+    }
+
+
 
     //endregion
 
 
     //region > injected services
 
-    @javax.inject.Inject
+    @Inject
     DomainObjectContainer container;
+    @Inject
+    ApplicationRoles applicationRoles;
 
     //endregion
 }

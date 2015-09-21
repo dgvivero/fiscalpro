@@ -7,10 +7,7 @@ import org.isisaddons.wicket.gmap3.cpt.applib.Locatable;
 import org.isisaddons.wicket.gmap3.cpt.applib.Location;
 import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.VersionStrategy;
+import javax.jdo.annotations.*;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,7 +16,7 @@ import java.util.TreeSet;
  */
 @javax.jdo.annotations.PersistenceCapable(identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.DatastoreIdentity(
-        strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY,
+        strategy= IdGeneratorStrategy.NATIVE,
         column="id_mesa")
 @javax.jdo.annotations.Version(
         strategy= VersionStrategy.VERSION_NUMBER,
@@ -36,12 +33,10 @@ import java.util.TreeSet;
                         + "WHERE nromesa.startsWith(:nromesa)")
 })
 @javax.jdo.annotations.Unique(name="MESAELECTORAL_UNQ", members = {"nroMesa"})
-@DomainObject(
-        objectType = "MESAELECTORAL"
-)
+@DomainObject(objectType = "MESAELECTORAL")
 public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
 
-  //region Titulo de la Entidad
+//region Titulo de la Entidad
     public String title() {
         final TitleBuffer buf = new TitleBuffer();
 
@@ -49,9 +44,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
         buf.concat("Mesa " + nroMesa);
         return buf.toString();
     }
-   // endregion
+// endregion
 
-    //region > establecimiento (property)
+//region > establecimiento (property)
     private Establecimiento establecimiento;
 
     @MemberOrder(name="General", sequence = "3")
@@ -64,8 +59,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
         this.establecimiento = establecimiento;
     }
 
-    //endregion
-    //region > nroMesa (property)
+//endregion
+
+//region > nroMesa (property)
     private Integer nroMesa;
 
     @MemberOrder(name="General", sequence = "4")
@@ -78,9 +74,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public void setNroMesa(final Integer nroMesa) {
         this.nroMesa = nroMesa;
     }
-    //endregion
+//endregion
 
-    //region > fiscales (collection)
+//region > fiscales (collection)
     @Persistent(mappedBy = "mesaElectoral")
     private SortedSet<Fiscal> fiscales = new TreeSet<Fiscal>();
 
@@ -91,9 +87,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public void setFiscales(final SortedSet<Fiscal> fiscales) {
         this.fiscales = fiscales;
     }
-    //endregion
+//endregion
 
-    //region > votosBlancos (property)
+//region > votosBlancos (property)
     private Integer votosBlancos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "1")
@@ -110,9 +106,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public Integer defaultVotosBlancos() {
         return 0;
     }
-    //endregion
+//endregion
 
-  //region > votosNulos (property)
+//region > votosNulos (property)
     private Integer votosNulos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "2")
@@ -129,9 +125,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public Integer defaultVotosNulos() {
         return 0;
     }
-  //endregion
+//endregion
 
-  //region > votosRecurridos (property)
+//region > votosRecurridos (property)
     private Integer votosRecurridos;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "3")
@@ -148,9 +144,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public Integer defaultVotosRecurridos() {
         return 0;
     }
-  //endregion
+//endregion
 
-  //region > votosIdentidadInpugnada (property)
+//region > votosIdentidadInpugnada (property)
     private Integer votosIdentidadInpugnada;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "4")
@@ -167,9 +163,9 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public Integer defaultVotosIdentidadInpugnada() {
         return 0;
     }
-  //endregion
+//endregion
 
-  //region > votantesConcurrentes (property)
+//region > votantesConcurrentes (property)
     private Integer votantesConcurrentes;
 
     @MemberOrder(name="Recuento de Mesa", sequence = "5")
@@ -186,7 +182,7 @@ public class MesaElectoral implements Comparable<MesaElectoral>, Locatable {
     public Integer defaultVotantesConcurrentes() {
         return 0;
     }
-  //endregion
+//endregion
 
   //region > sobresUtilizados (property)
     private Integer sobresUtilizados;

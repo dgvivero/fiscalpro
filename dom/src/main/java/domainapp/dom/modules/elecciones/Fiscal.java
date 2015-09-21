@@ -25,11 +25,7 @@ import java.util.Collection;
         column="id_fiscal")
 @javax.jdo.annotations.Inheritance(
         strategy = InheritanceStrategy.NEW_TABLE)
-/**
-@javax.jdo.annotations.Version(
-        strategy= VersionStrategy.VERSION_NUMBER,
-        column="version")
-        **/
+@Discriminator(strategy=DiscriminatorStrategy.CLASS_NAME)
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = "find", language = "JDOQL",
@@ -45,26 +41,6 @@ import java.util.Collection;
 @DomainObject(objectType = "FISCAL")
 public class Fiscal extends ApplicationUser implements  Locatable {
 
-
-    /* region > usuario (property)
-
-    private ApplicationUser usuario;
-
-    @MemberOrder(sequence = "1")
-    @Column(allowsNull = "True")
-    public ApplicationUser getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(final ApplicationUser usuario) {
-        this.usuario = usuario;
-    }
-
-    @Programmatic
-    public Collection<ApplicationUser> autoCompleteUsuario(final String search) {
-        return usuarios.autoComplete(search);
-    }
-    endregion */
 
     public enum TipoDocumento {
         DNI, LE, LC, CI

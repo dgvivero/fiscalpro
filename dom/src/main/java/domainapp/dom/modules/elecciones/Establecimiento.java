@@ -35,7 +35,7 @@ import java.util.TreeSet;
                         + "FROM domainapp.dom.modules.elecciones.Establecimiento "
                         + "WHERE nombreEstablecimiento.startsWith(:nombreEstablecimiento)")
 })
-@javax.jdo.annotations.Unique(name="MESAELECTORAL_UNQ", members = {"nombreEstablecimiento"})
+@javax.jdo.annotations.Unique(name="ESTABLECIMIENTO_UNQ", members = {"nombreEstablecimiento"})
 @DomainObject(objectType = "ESTABLECIMIENTO")
 public class Establecimiento  implements   Comparable<Establecimiento>, Locatable {
 
